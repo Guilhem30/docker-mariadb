@@ -1,5 +1,5 @@
 FROM phusion/baseimage
-MAINTAINER Ryan Seto <ryanseto@yak.net>
+MAINTAINER Bertrand RETIF <bretif@sudokeys.com>
 
 # Ensure UTF-8
 RUN locale-gen en_US.UTF-8
