@@ -4,9 +4,6 @@ MAINTAINER Bertrand RETIF <bretif@sudokeys.com>
 # Ensure UTF-8
 RUN locale-gen en_US.UTF-8
 
-# Disable SSH (Not using it at the moment).
-RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
-
 # Install MariaDB from repository.
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0xcbcb082a1bb943db && \
     echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/mariadb.list && \
@@ -33,6 +30,11 @@ EXPOSE 3306
 ADD scripts /scripts
 RUN chmod +x /scripts/start.sh
 RUN touch /firstrun
+
+# Add my public keys
+ADD pubkeys /tmp/pubkeys
+RUN cat /tmp/pubkeys/*.pub >> /root/.ssh/authorized_keys && rm -rf /tmp/pubkeys/
+EXPOSE 22
 
 # Expose our data, log, and configuration directories.
 VOLUME ["/data", "/var/log/mysql", "/etc/mysql"]
