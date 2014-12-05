@@ -1,5 +1,5 @@
-FROM phusion/baseimage
-MAINTAINER Bertrand RETIF <bretif@sudokeys.com>
+FROM guilhem30/sudokeys:0.1
+MAINTAINER Guilhem Berna <guilhem.berna@gmail.com>
 
 # Ensure UTF-8
 RUN locale-gen en_US.UTF-8
@@ -30,11 +30,6 @@ EXPOSE 3306
 ADD scripts /scripts
 RUN chmod +x /scripts/start.sh
 RUN touch /firstrun
-
-# Add my public keys
-ADD pubkeys /tmp/pubkeys
-RUN cat /tmp/pubkeys/*.pub >> /root/.ssh/authorized_keys && rm -rf /tmp/pubkeys/
-EXPOSE 22
 
 # Expose our data, log, and configuration directories.
 VOLUME ["/data", "/var/log/mysql", "/etc/mysql"]
