@@ -1,4 +1,4 @@
-FROM guilhem30/sudokeys:0.1
+FROM guilhem30/sudokeys:0.2
 MAINTAINER Guilhem Berna <guilhem.berna@gmail.com>
 
 # Ensure UTF-8

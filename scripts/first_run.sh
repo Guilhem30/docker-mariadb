@@ -6,6 +6,7 @@ pre_start_action() {
   echo "MARIADB_USER=$USER"
   echo "MARIADB_PASS=$PASS"
   echo "MARIADB_DATA_DIR=$DATA_DIR"
+  sed -i "s/.*DBPASS=.*/DBPASS=$PASS/g"  /appli/mybackup_bases/mybackup_bases.ini
 
   # test if DATA_DIR has content
   if [[ ! "$(ls -A $DATA_DIR)" ]]; then
